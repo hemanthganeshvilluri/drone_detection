@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Video Drone Detection</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="container">
+  <h1>🎥 Drone Detection <span>Video</span></h1>
+
+  <div class="card">
+    <input type="file" id="file" accept="video/*">
+    <button onclick="upload()">Process Video</button>
+
+    <div class="status" id="status"></div>
+  </div>
+</div>
+
+<script>
+function upload() {
+  const fileInput = document.getElementById("file");
+  const status = document.getElementById("status");
+
+  status.innerText = "⏳ Processing video...";
+
+  const formData = new FormData();
+  formData.append("file", fileInput.files[0]);
+
+  fetch("/predict/video", {
+    method: "POST",
+    body: formData
+  })
+  .then(res => res.json())
+  .then(data => {
+    status.innerHTML =
+      `✅ Done! Output saved as <b>${data.output_video}</b>`;
+  });
+}
+</script>
+
+</body>
+</html><!DOCTYPE html>
+<html>
+<head>
+  <title>Video Drone Detection</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="container">
+  <h1>🎥 Drone Detection <span>Video</span></h1>
+
+  <div class="card">
+    <input type="file" id="file" accept="video/*">
+    <button onclick="upload()">Process Video</button>
+
+    <div class="status" id="status"></div>
+  </div>
+</div>
+
+<script>
+function upload() {
+  const fileInput = document.getElementById("file");
+  const status = document.getElementById("status");
+
+  status.innerText = "⏳ Processing video...";
+
+  const formData = new FormData();
+  formData.append("file", fileInput.files[0]);
+
+  fetch("/predict/video", {
+    method: "POST",
+    body: formData
+  })
+  .then(res => res.json())
+  .then(data => {
+    status.innerHTML =
+      `✅ Done! Output saved as <b>${data.output_video}</b>`;
+  });
+}
+</script>
+
+</body>
+</html>

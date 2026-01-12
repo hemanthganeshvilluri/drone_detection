@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Image Drone Detection</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="container">
+  <h1>🖼️ Drone Detection <span>Image</span></h1>
+
+  <div class="card">
+    <input type="file" id="file" accept="image/*">
+    <button onclick="upload()">Detect Drone</button>
+
+    <div class="status" id="status"></div>
+
+    <div class="result">
+      <img id="result">
+    </div>
+  </div>
+</div>
+
+<script>
+function upload() {
+  const fileInput = document.getElementById("file");
+  const status = document.getElementById("status");
+
+  status.innerText = "🔍 Running AI inference...";
+
+  const formData = new FormData();
+  formData.append("file", fileInput.files[0]);
+
+  fetch("/predict/image", {
+    method: "POST",
+    body: formData
+  })
+  .then(res => res.blob())
+  .then(blob => {
+    document.getElementById("result").src =
+      URL.createObjectURL(blob);
+    status.innerText = "✅ Detection complete";
+  });
+}
+</script>
+
+</body>
+</html>
